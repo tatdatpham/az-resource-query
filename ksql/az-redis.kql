@@ -1,0 +1,5 @@
+resources
+| where subscriptionId == "xxxxxxxxxxxxxxxx"
+| where type == "microsoft.cache/redis"
+| project id, name, location, SkuName = tostring(properties.sku.name), SkuFamily = tostring(properties.sku.family), SkuCapacity = tostring(properties.sku.capacity), HostName= tostring(properties.hostName), SubnetID = split(properties.subnetId, '/')[-1], RedisVersion = tostring(properties.redisVersion), PublicAccess=tostring(properties.publicNetworkAccess), PrivateEndpoint=split(properties.privateEndpointConnections[0].properties.privateEndpoint.id, '/')[-1]
+

@@ -1,0 +1,4 @@
+resources
+| where  subscriptionId =="532804b0-0cd1-45d1-8c5b-e8a9f082fb48"
+| where type =~ 'Microsoft.Sql/servers'
+| project id, name, resourceGroup, location, FQDN= tostring(properties.fullyQualifiedDomainName), pricingTier = tostring(properties.sku.tier), PublicAccess=tostring(properties.publicNetworkAccess), PrivateEndpoint=split(properties.privateEndpointConnections[0].properties.privateEndpoint.id, '/')[-1], properties

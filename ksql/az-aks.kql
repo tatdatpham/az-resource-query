@@ -1,0 +1,6 @@
+resources
+| where subscriptionId == "532804b0-0cd1-45d1-8c5b-e8a9f082fb48"
+| where type == "microsoft.containerservice/managedclusters"
+| project name, ['kind'], location, resourceGroup, SkuName=tostring(sku.name), SkuTier=tostring(sku.tier), K8sVer=properties.kubernetesVersion, NodePool=properties.nodeResourceGroup,
+    NetworkPlugin = properties.networkProfile.networkPlugin, PowerState = properties.powerState.code
+
