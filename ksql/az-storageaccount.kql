@@ -1,0 +1,12 @@
+resources
+| where subscriptionId == "xxxxxxxxxxxxxxxx"
+| where type =~ "microsoft.storage/storageaccounts"
+| project id, name, kind, location, sku=sku.name,
+    accessTier=properties.accessTier,
+    httpsOnly=properties.supportsHttpsTrafficOnly,
+    minTlsVer=properties.minimumTlsVersion,
+    privateEndpoint1=split(properties.privateEndpointConnections[0].properties.privateEndpoint.id, '/')[-1],
+    privateEndpoint2=split(properties.privateEndpointConnections[1].properties.privateEndpoint.id, '/')[-1],
+    privateEndpoint3=split(properties.privateEndpointConnections[2].properties.privateEndpoint.id, '/')[-1],
+    privateEndpoint4=split(properties.privateEndpointConnections[3].properties.privateEndpoint.id, '/')[-1]
+
